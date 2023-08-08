@@ -43,30 +43,34 @@ function ScrollSpy() {
             };
             indicator_settings_saved = settings_indicator;
             ForceActiveIndicator = settings_indicator['forceActive'];
-
+        
             if (settings_indicator['element'] !== null || typeof settings_indicator['element'] !== 'undefined') {
                 settings_indicator['element'].innerHTML = '';
                 var indicator = document.createElement('ul');
                 indicator.classList.add('scrollspy-indicator-container');
-
+        
                 if (typeof settings_indicator['indicator_container_class'] !== 'undefined') {
                     indicator.classList.add(settings_indicator['indicator_container_class']);
                 }
-
+        
                 settings_indicator['element'].appendChild(indicator);
                 Array.prototype.forEach.call(SpySections, function (element) {
                     var indicator_item = document.createElement('li');
-
+        
                     if (typeof settings_indicator['indicator_item_class'] !== 'undefined') {
                         indicator_item.classList.add(settings_indicator['indicator_item_class']);
                     }
-
+        
+                    // Add indentation for subchapters
+                    var indentationLevel = 0; // You can adjust this based on your needs
+                    indicator_item.style.marginLeft = (indentationLevel * 20) + 'px'; // Adjust the pixel value as needed
+        
                     indicator_item.innerHTML = element[0].getAttribute('spy-title');
                     indicator.appendChild(indicator_item);
-
+        
                     if (settings_indicator['clickable'] !== false) {
                         indicator_item.classList.add('spy-clickable');
-
+        
                         indicator_item.onclick = function (event) {
                             Array.prototype.forEach.call(SpySections, function (element) {
                                 if (element[1] === event.target) {
@@ -75,12 +79,12 @@ function ScrollSpy() {
                             });
                         };
                     }
-
+        
                     element.push(indicator_item);
                 });
                 hasIndicator = true;
             }
-        }
+        }        
     };
 
     var CheckIsInView = function CheckIsInView(element) {

@@ -31,3 +31,29 @@
 .scrollspy-indicator-container li.spy-clickable:hover {
   color: #ef5350;
 }
+/**
+Neu!!!
+**/
+
+.scrollspy-indicator-container div {
+  transition: all 0.15s;
+}
+
+.scrollspy-indicator-container div.spy-active {
+  font-weight: bold;
+  color: #d32f2f;
+  border-left: 5px solid #d32f2f;
+  /*
+  * For right-to-left languages, uncomment the styles below :
+  * border-left: none;
+  * border-right: $Active_Border_Width solid $Active_Border_Color;
+  */
+}
+
+.scrollspy-indicator-container div.spy-clickable {
+  cursor: pointer;
+}
+
+.scrollspy-indicator-container div.spy-clickable:hover {
+  color: #ef5350;
+}
