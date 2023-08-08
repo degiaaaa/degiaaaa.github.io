@@ -281,7 +281,131 @@ forceActive<i>:</i> <b>false</b><i>,</i>
 
             <p style="text-align: center">You can download the latest release of library from <a href="https://github.com/erfanmola/ScrollSpy.js">this github repository</a>.</p>
         </section>
+        <section class="scrollspy" spy-title="1 Introduction to Python">
+            <h2>1 Introduction to Python: Learn about the history and use cases of Python. Discuss its popularity and why it's a great language to learn for beginners. </h2>
 
+            <h3>Include CSS</h3>
+
+            <p>First include the stylesheet in your HTML head (Optional):</p>
+
+            <pre style='color:black;background:white;'><code class="hljs html"><b>&lt;</b><b>link</b> rel<i>=</i><b>"stylesheet"</b> href<i>=</i><b>"ScrollSpy.min.css"</b><b>></b></code></pre>
+
+            <h3>Include JS</h3>
+
+            <p>Now include the JavaScript in your HTML footer :</p>
+
+            <pre style='color:black;background:white;'><code class="hljs html"><b>&lt;</b><b>script</b> src<i>=</i><b>"ScrollSpy.min.js"</b><b>></b><b>&lt;/</b><b>script</b><b>></b></code></pre>
+            <div class="subsection" spy-title="Subsection 1.1">
+                <h3>Subsection 1.1</h3>
+                <p>Content of subsection 1.1...</p>
+              </div>
+        </section>
+
+        <section class="scrollspy" spy-title="2 Setting up your Python environment">
+            <h2>2 Setting up your Python environment: Learn how to install and set up Python on your computer. Discuss different IDEs (Integrated Development Environments) and how to use them for Python development.</h2>
+
+            <h3>HTML Markup</h3>
+
+            <p>Now let's create a HTML structure like below : </p>
+
+            <pre><code class="hljs html"><b>&lt;</b><b>div</b> class<i>=</i><b>"scrollspy"</b> spy-title<i>=</i><b>"Section Title"</b><b>></b>Content<b>&lt;/</b><b>div</b><b>></b>
+<b>&lt;</b><b>div</b> class<i>=</i><b>"scrollspy"</b> spy-title<i>=</i><b>"Section Title"</b><b>></b>Content<b>&lt;/</b><b>div</b><b>></b>
+<b>&lt;</b><b>div</b> class<i>=</i><b>"scrollspy"</b> spy-title<i>=</i><b>"Section Title"</b><b>></b>Content<b>&lt;/</b><b>div</b><b>></b>
+<b>&lt;</b><b>div</b> class<i>=</i><b>"scrollspy"</b> spy-title<i>=</i><b>"Section Title"</b><b>></b>Content<b>&lt;/</b><b>div</b><b>></b>
+<b>&lt;</b><b>div</b> class<i>=</i><b>"scrollspy"</b> spy-title<i>=</i><b>"Section Title"</b><b>></b>Content<b>&lt;/</b><b>div</b><b>></b>
+<b>&lt;</b><b>div</b> class<i>=</i><b>"scrollspy"</b> spy-title<i>=</i><b>"Section Title"</b><b>></b>Content<b>&lt;/</b><b>div</b><b>></b>
+
+<b>&lt;</b><b>div</b> id<i>=</i><b>"indicator"</b><b>>&lt;/</b><b>div</b><b>></b></code></pre>
+            
+            <h3>Initializing with JS</h3>
+
+            <p>Then, let's initialize the library for our markup :</p>
+
+            <pre><code class="hljs javascript"><b>var</b> spy <i>=</i> <b>new</b> ScrollSpy<i>(</i><i>{</i>
+contexts_class<i>:</i> <b>'</b><b>scrollspy</b><b>'</b>
+<i>}</i><i>)</i><i>;</i></code></pre>
+        </section>
+
+        <section class="scrollspy" spy-title="3 Python Syntax">
+            <h2>3 Python Syntax: Learn about the basic syntax of Python, including indentation, comments, and basic control structures such as if-else statements and loops.</h2>
+
+            <p>Here is a full list of options that can be passed to library while initializing :</p>
+
+            <pre><code class="hljs javascript"><b>var</b> spy <i>=</i> <b>new</b> ScrollSpy<i>(</i><i>{</i>
+    contexts_class<i>:</i> <b>'</b><b>scrollspy</b><b>'</b><i>,</i>
+    delay<i>:</i> 200<i>,</i>
+    callbackOnChange<i>:</i> <b>function</b> <i>(</i>el<i>)</i> <i>{</i> <b>alert</b><i>(</i><b>'</b><b>Active Element Changed</b><b>'</b><i>)</i><i>;</i> <i>}</i><i>,</i>
+    callbackOnDestroy<i>:</i> <b>function</b> <i>(</i><i>)</i> <i>{</i> <b>alert</b><i>(</i><b>'</b><b>ScrollSpy Distroyed !</b><b>'</b><i>)</i><i>;</i> <i>}</i>
+<i>}</i><i>)</i><i>;</i></code></pre>
+
+            <div class="parameter">
+                <kbd>contexts_class</kbd>
+                <span>class of the elements that need to be tracked by the library.</span>
+            </div>
+
+            <div class="parameter">
+                <kbd>delay</kbd>
+                <span>time of delay between detecting scrolls, by default it's 200ms.</span>
+            </div>
+
+            <div class="parameter">
+                <kbd>callbackOnChange</kbd>
+                <span>function that gets called each time when active element of the page changes.</span>
+            </div>
+
+            <div class="parameter">
+                <kbd>callbackOnDestroy</kbd>
+                <span>function that gets called after calling the destroy method.</span>
+            </div>
+
+        </section>
+
+        <section class="scrollspy" spy-title="4 Variables">
+            <h2>4 Variables: Learn about variables in Python and how to use them to store and manipulate data. Discuss the different data types in Python, including integers, floats, strings, and booleans.</h2>
+
+            <p>Also here is a full list of options that can be passed to library while initializing an indicator :</p>
+
+            <pre><code class="hljs javascript">spy<i>.</i>Indicator<i>(</i><i>{</i>
+element<i>:</i> document<i>.</i>getElementById<i>(</i><b>'</b><b>indicator</b><b>'</b><i>)</i><i>,</i>
+indicator_container_class<i>:</i> <b>'</b><b>scrollspy-indicator</b><b>'</b><i>,</i>
+indicator_item_class<i>:</i> <b>'</b><b>scrollspy-indicator-item</b><b>'</b><i>,</i>
+clickable<i>:</i> <b>true</b><i>,</i>
+forceActive<i>:</i> <b>false</b><i>,</i>
+<i>}</i><i>)</i><i>;</i></code></pre>
+
+            <div class="parameter">
+                <kbd>element</kbd>
+                <span>the element that will be used as indicator container.</span>
+            </div>
+
+            <div class="parameter">
+                <kbd>indicator_container_class</kbd>
+                <span>class of the indicator's container.</span>
+            </div>
+
+            <div class="parameter">
+                <kbd>indicator_item_class</kbd>
+                <span>class of the indicator's items.</span>
+            </div>
+
+            <div class="parameter">
+                <kbd>clickable</kbd>
+                <span>specifies whether the indicator's items will be clickable, check <a href="https://github.com/erfanmola/ScrollSpy.js/tree/master/test/EN/Demo%201">this demo</a>.</span>
+            </div>
+
+            <div class="parameter">
+                <kbd>forceActive</kbd>
+                <span>specifies whether the indicator must have an active element, check <a href="https://github.com/erfanmola/ScrollSpy.js/tree/master/test/EN/Demo%202">this demo</a>.</span>
+            </div>
+
+        </section>
+
+
+        <section class="scrollspy" spy-title="5 Strings">
+            <h2>5 Strings: Learn about strings in Python and how to manipulate them. Discuss different string methods such as len(), upper(), lower(), and string concatenation.</h2>
+
+            <p style="text-align: center">You can download the latest release of library from <a href="https://github.com/erfanmola/ScrollSpy.js">this github repository</a>.</p>
+        </section>
         </div>
 
         <div id="indicator"></div>
