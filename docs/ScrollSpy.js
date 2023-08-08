@@ -33,59 +33,81 @@ function ScrollSpy() {
             var callbackOnDestroy = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : callback_OnDestroy;
             DestroyOnScrollEvent(callbackOnDestroy());
         },
-        Indicator: function Indicator() {
-            var settings_indicator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-                element: null,
-                indicator_container_class: '',
-                indicator_item_class: '',
-                clickable: true,
-                forceActive: false
+        unction ScrollSpy() {
+            var settings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+                contexts_class: 'scrollspy',
+                delay: 200,
+                callbackOnChange: function callbackOnChange() {},
+                callbackOnDestroy: function callbackOnDestroy() {}
             };
-            indicator_settings_saved = settings_indicator;
-            ForceActiveIndicator = settings_indicator['forceActive'];
+            var callback_OnChange = typeof settings['callbackOnChange'] !== 'undefined' ? settings['callbackOnChange'] : function () {},
+                callback_OnDestroy = typeof settings['callbackOnDestroy'] !== 'undefined' ? settings['callbackOnDestroy'] : function () {},
+                delay = settings['delay'],
+                page_visible_height = window.innerHeight,
+                SpySections = [],
+                indicator_settings_saved = [],
+                CurrentPositionTop = -1,
+                lastItemPercent = -1,
+                lastScrollFireTime = 0,
+                scrollTimer,
+                fakePercent = true,
+                firstScroll = true,
+                ForceActiveIndicator = false,
+                hasIndicator = false;
+            var self = {
+                "destroy": function destroy() {
+                    var callbackOnDestroy = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : callback_OnDestroy;
+                    DestroyOnScrollEvent(callbackOnDestroy());
+                },
+                Indicator: function Indicator() {
+                    var settings_indicator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+                        element: null,
+                        indicator_container_class: '',
+                        indicator_item_class: '',
+                        clickable: true,
+                        forceActive: false
+                    };
+                    indicator_settings_saved = settings_indicator;
+                    ForceActiveIndicator = settings_indicator['forceActive'];
         
-            if (settings_indicator['element'] !== null || typeof settings_indicator['element'] !== 'undefined') {
-                settings_indicator['element'].innerHTML = '';
-                var indicator = document.createElement('ul');
-                indicator.classList.add('scrollspy-indicator-container');
+                    if (settings_indicator['element'] !== null || typeof settings_indicator['element'] !== 'undefined') {
+                        settings_indicator['element'].innerHTML = '';
+                        var indicator = document.createElement('ul');
+                        indicator.classList.add('scrollspy-indicator-container');
         
-                if (typeof settings_indicator['indicator_container_class'] !== 'undefined') {
-                    indicator.classList.add(settings_indicator['indicator_container_class']);
+                        if (typeof settings_indicator['indicator_container_class'] !== 'undefined') {
+                            indicator.classList.add(settings_indicator['indicator_container_class']);
+                        }
+        
+                        settings_indicator['element'].appendChild(indicator);
+                        Array.prototype.forEach.call(SpySections, function (element) {
+                            var indicator_item = document.createElement('li');
+        
+                            if (typeof settings_indicator['indicator_item_class'] !== 'undefined') {
+                                indicator_item.classList.add(settings_indicator['indicator_item_class']);
+                            }
+        
+                            indicator_item.innerHTML = element[0].getAttribute('spy-title');
+                            indicator.appendChild(indicator_item);
+        
+                            if (settings_indicator['clickable'] !== false) {
+                                indicator_item.classList.add('spy-clickable');
+        
+                                indicator_item.onclick = function (event) {
+                                    Array.prototype.forEach.call(SpySections, function (element) {
+                                        if (element[1] === event.target) {
+                                            ScrollToSection(element[0]);
+                                        }
+                                    });
+                                };
+                            }
+        
+                            element.push(indicator_item);
+                        });
+                        hasIndicator = true;
+                    }
                 }
-        
-                settings_indicator['element'].appendChild(indicator);
-                Array.prototype.forEach.call(SpySections, function (element) {
-                    var indicator_item = document.createElement('li');
-        
-                    if (typeof settings_indicator['indicator_item_class'] !== 'undefined') {
-                        indicator_item.classList.add(settings_indicator['indicator_item_class']);
-                    }
-        
-                    // Add indentation for subchapters
-                    var indentationLevel = 0; // You can adjust this based on your needs
-                    indicator_item.style.marginLeft = (indentationLevel * 20) + 'px'; // Adjust the pixel value as needed
-        
-                    indicator_item.innerHTML = element[0].getAttribute('spy-title');
-                    indicator.appendChild(indicator_item);
-        
-                    if (settings_indicator['clickable'] !== false) {
-                        indicator_item.classList.add('spy-clickable');
-        
-                        indicator_item.onclick = function (event) {
-                            Array.prototype.forEach.call(SpySections, function (element) {
-                                if (element[1] === event.target) {
-                                    ScrollToSection(element[0]);
-                                }
-                            });
-                        };
-                    }
-        
-                    element.push(indicator_item);
-                });
-                hasIndicator = true;
-            }
-        }        
-    };
+            };
 
     var CheckIsInView = function CheckIsInView(element) {
         var ScrollPos = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ScrollPosition();
